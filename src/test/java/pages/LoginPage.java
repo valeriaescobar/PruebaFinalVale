@@ -17,8 +17,8 @@ public class LoginPage extends BasePage {
     @FindBy(css = "#send2")
     public static WebElement loginButton;
 
-    @FindBy(css ="#nav > ol > li.level0.nav-4.parent > a")
-    public static WebElement homeAndDecorBotton;
+    @FindBy(css = "#nav > ol > li.level0.nav-4.active.parent > a")
+    public static WebElement homeAndDecorButton;
 
     @FindBy(css ="#email")
     public static WebElement email;
@@ -27,12 +27,12 @@ public class LoginPage extends BasePage {
     public static WebElement pass;
 
     @FindBy(css ="body > div > div.page > div.main-container.col1-layout > div > div.col-main > ul > li:nth-child(4) > a")
-    public static WebElement decorativeAccentsBotton;
+    public static WebElement decorativeAccentsButton;
 
     @Step("Click Subcategory")
     public static void clickSubcategory() {
-        homeAndDecorBotton.click();
-        decorativeAccentsBotton.click();
+        homeAndDecorButton.click();
+        decorativeAccentsButton.click();
     }
 
     @Step("Insert username and password")

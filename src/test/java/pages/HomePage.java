@@ -30,8 +30,12 @@ public class HomePage extends BasePage {
     @FindBy(css = "#header > div > div.skip-links > a.skip-link.skip-account")
     private static WebElement accountBotton;
 
+
     @FindBy(css = "#header-account > div > ul > li.last > a")
     private static WebElement logInBotton;
+
+    @FindBy(css = "#header-account > div > ul > li.last > a")
+    private static WebElement logOutBotton;
 
     @Step("Click To Login")
     public static void clickToLogin() {
@@ -48,7 +52,7 @@ public class HomePage extends BasePage {
     }
 
     @Step("Change Language")
-    public void changeLanguage(String Language) {
+    public static void changeLanguage(String Language) {
         selectLanguage.click();
         new Select(driver.findElement(By.id("select-language"))).selectByVisibleText(Language);
     }
@@ -59,6 +63,13 @@ public class HomePage extends BasePage {
         driver.findElement(By.id("search")).sendKeys(product);
         searchBotton.submit();
         driver.findElement(By.id(product)).click();
+    }
+
+    @Step("Logout")
+    public static LoginPage logOut() {
+        accountBotton.click();
+        logOutBotton.click();
+        return new LoginPage(driver);
     }
 
 }

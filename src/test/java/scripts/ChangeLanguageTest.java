@@ -1,25 +1,21 @@
 package scripts;
 
-import dataProvider.LoginData;
+import dataProvider.ChangeLanguageData;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.ProductPage;
-import pages.SubCategoryPage;
-import utils.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import utils.Constants;
 
-import static org.testng.Assert.assertEquals;
+public class ChangeLanguageTest {
 
-public class AddProductWishList {
     private static WebDriver driver;
 
     @BeforeTest
@@ -33,19 +29,13 @@ public class AddProductWishList {
         driver.get(Constants.urlBase);
     }
 
-    @Test (dataProvider = "login", dataProviderClass = LoginData.class)
-    public static void addProductWishList (String mail, String password) {
 
-        String expectedWishListMessage = "Stone Salt and Pepper Shakers has been added to your wishlist. Click here to continue shopping.";
-
+    @Test (dataProvider = "changelanguage", dataProviderClass = ChangeLanguageData.class)
+    public void changeLanguageTest(String Language) {
+        driver.get("http://magento-demo.lexiconn.com/");
         HomePage homePage = new HomePage(driver);
-        HomePage.clickToLogin();
-        LoginPage.setMailAndPass(mail, password);
-        LoginPage.clickLoginButton();
-        LoginPage.clickSubcategory();
-        SubCategoryPage.clickToProduct();
-        ProductPage.addWishlistProduct();
-        assertEquals(ProductPage.getWishListMessage(), expectedWishListMessage);
+        HomePage.changeLanguage(Language);
+
         takeScreenshot();
     }
 
@@ -73,4 +63,5 @@ public class AddProductWishList {
         }
         return image;
     }
+
 }
