@@ -22,6 +22,9 @@ public class ProductPage extends BasePage {
     @FindBy(css = "body > div > div.page > div.main-container.col2-left-layout > div > div.col-main > div.my-account > div.my-wishlist > ul > li > ul > li > span")
     private static WebElement wishListMessage;
 
+    @FindBy(css = "body > div > div.page > div.main-container.col3-layout > div > div.col-wrapper > div.col-main > div.page-title > h1")
+    private static WebElement productTitle;
+
     @Step("Add Product to Wish List")
     public static void addWishlistProduct () {
         addWishlistBotton.click();
@@ -37,4 +40,8 @@ public class ProductPage extends BasePage {
         return wishListMessage.getText();
     }
 
+    @Step("Get Tittle Product")
+    public static String getTitleProductMessage() {
+        return productTitle.getText();
+    }
 }

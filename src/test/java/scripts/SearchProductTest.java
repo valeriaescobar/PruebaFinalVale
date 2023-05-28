@@ -1,6 +1,6 @@
 package scripts;
 
-import dataProvider.LoginData;
+import dataProvider.SearchData;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -14,13 +14,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.ProductPage;
 import utils.Constants;
 
 import static org.testng.Assert.assertEquals;
 
-public class LoginTest {
+public class SearchProductTest {
+
     private static WebDriver driver;
-    private LoginPage newLoginPage;
 
     @BeforeTest
     public void setUp() {
@@ -33,21 +34,20 @@ public class LoginTest {
         driver.get(Constants.urlBase);
     }
 
-    @Test(dataProvider = "login", dataProviderClass = LoginData.class)
-    public void LoginTest(String mail, String password)  {
+    @Test(dataProvider = "product", dataProviderClass = SearchData.class)
+    public void searchProductTest(String Product)  {
 
-        String expectedTitle = "MY DASHBOARD";
-        
+        String expectedTitleProduct = "SEARCH RESULTS FOR 'STONE SALT AND PEPPER SHAKERS'";
+
         HomePage homePage = new HomePage(driver);
-        HomePage.clickToLogin();
-        LoginPage loginPage = new LoginPage(driver);
-        LoginPage.setMailAndPass(mail, password);
-        LoginPage.clickLoginButton();
-        assertEquals(LoginPage.getTitleMessage(), expectedTitle);
+        HomePage.searchProduct(Product);
+        ProductPage productPage = new ProductPage(driver);
+        assertEquals(ProductPage.getTitleProductMessage(), expectedTitleProduct);
 
         takeScreenshot();
 
     }
+
 
     @AfterTest
     public void tearDown() {

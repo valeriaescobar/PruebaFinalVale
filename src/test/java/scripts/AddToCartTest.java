@@ -1,8 +1,7 @@
 package scripts;
 
-import dataProvider.LoginData;
+import dataProvider.SearchData;
 import io.qameta.allure.Attachment;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -13,14 +12,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.LoginPage;
+import pages.ProductPage;
 import utils.Constants;
 
 import static org.testng.Assert.assertEquals;
 
-public class LoginTest {
+public class AddToCartTest {
+
     private static WebDriver driver;
-    private LoginPage newLoginPage;
+
 
     @BeforeTest
     public void setUp() {
@@ -33,21 +33,20 @@ public class LoginTest {
         driver.get(Constants.urlBase);
     }
 
-    @Test(dataProvider = "login", dataProviderClass = LoginData.class)
-    public void LoginTest(String mail, String password)  {
+    @Test(dataProvider = "product", dataProviderClass = SearchData.class)
+    public void addToCartTest(String Product) {
 
-        String expectedTitle = "MY DASHBOARD";
-        
+        String expectedAddToCart = "was added to your shopping cart.";
+
         HomePage homePage = new HomePage(driver);
-        HomePage.clickToLogin();
-        LoginPage loginPage = new LoginPage(driver);
-        LoginPage.setMailAndPass(mail, password);
-        LoginPage.clickLoginButton();
-        assertEquals(LoginPage.getTitleMessage(), expectedTitle);
+        homePage.searchProduct(Product);
+        ProductPage productPage = new ProductPage(driver);
+        productPage.addToCart();
+        assertEquals(ProductPage.getWishListMessage(), expectedAddToCart);
 
         takeScreenshot();
-
     }
+
 
     @AfterTest
     public void tearDown() {

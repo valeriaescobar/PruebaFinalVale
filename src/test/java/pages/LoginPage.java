@@ -29,6 +29,9 @@ public class LoginPage extends BasePage {
     @FindBy(css ="body > div > div.page > div.main-container.col1-layout > div > div.col-main > ul > li:nth-child(4) > a")
     public static WebElement decorativeAccentsButton;
 
+    @FindBy(css ="body > div > div.page > div.main-container.col2-left-layout > div > div.col-main > div > div > div.page-title > h1")
+    public static WebElement tittle;
+
     @Step("Click Subcategory")
     public static void clickSubcategory() {
         homeAndDecorButton.click();
@@ -49,6 +52,11 @@ public class LoginPage extends BasePage {
     public static HomePage clickLoginButton() {
         loginButton.click();
         return new HomePage(driver);
+    }
+
+    @Step("Get title message")
+    public static String getTitleMessage() {
+        return tittle.getText();
     }
 
 }
