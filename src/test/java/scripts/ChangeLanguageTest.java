@@ -32,7 +32,7 @@ public class ChangeLanguageTest {
 
     @Test (dataProvider = "changelanguage", dataProviderClass = ChangeLanguageData.class)
     public void changeLanguageTest(String Language) {
-        driver.get("http://magento-demo.lexiconn.com/");
+
         HomePage homePage = new HomePage(driver);
         HomePage.changeLanguage(Language);
 

@@ -2,7 +2,6 @@ package scripts;
 
 import dataProvider.LoginData;
 import io.qameta.allure.Attachment;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +19,6 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginTest {
     private static WebDriver driver;
-    private LoginPage newLoginPage;
 
     @BeforeTest
     public void setUp() {

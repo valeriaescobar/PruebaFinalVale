@@ -2,7 +2,6 @@ package scripts;
 
 import dataProvider.SearchData;
 import io.qameta.allure.Attachment;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +12,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.LoginPage;
 import pages.ProductPage;
 import utils.Constants;
 

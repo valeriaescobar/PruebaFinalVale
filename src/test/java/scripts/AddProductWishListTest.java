@@ -4,18 +4,17 @@ import dataProvider.LoginData;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.ProductPage;
-import pages.SubCategoryPage;
-import utils.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.ProductPage;
+import utils.Constants;
 
 import static org.testng.Assert.assertEquals;
 
@@ -33,16 +32,19 @@ public class AddProductWishListTest {
         driver.get(Constants.urlBase);
     }
 
-    @Test
-    public static void addProductWishListTest () {
+    @Test(dataProvider = "login", dataProviderClass = LoginData.class)
+    public static void addProductWishListTest (String mail, String password) {
 
         String expectedWishListMessage = "Stone Salt and Pepper Shakers has been added to your wishlist. Click here to continue shopping.";
 
-
         HomePage homePage = new HomePage(driver);
-        new LoginTest();
-        LoginPage.clickSubcategory();
-        SubCategoryPage.clickToProduct();
+        HomePage.clickToLogin();
+        LoginPage loginPage = new LoginPage(driver);
+        LoginPage.setMailAndPass(mail, password);
+        LoginPage.clickLoginButton();
+        LoginPage.backtoHome();
+        homePage = new HomePage(driver);
+        homePage.searchAndClickProduct();
         ProductPage.addWishlistProduct();
         assertEquals(ProductPage.getWishListMessage(), expectedWishListMessage);
         takeScreenshot();

@@ -13,10 +13,10 @@ public class ProductPage extends BasePage {
     @FindBy(id = "product-collection-image-390")
     private static WebElement product;
 
-    @FindBy(id = "Add to Cart")
+    @FindBy(css = "#product_addtocart_form > div.add-to-cart-wrapper > div > div > div.add-to-cart-buttons > button")
     private static WebElement addToCartButton;
 
-    @FindBy(id ="Add to Wishlist")
+    @FindBy(css ="#product_addtocart_form > div.add-to-cart-wrapper > div > ul.add-to-links > li:nth-child(1) > a")
     private static WebElement addWishlistBotton;
 
     @FindBy(css = "body > div > div.page > div.main-container.col2-left-layout > div > div.col-main > div.my-account > div.my-wishlist > ul > li > ul > li > span")
@@ -24,6 +24,9 @@ public class ProductPage extends BasePage {
 
     @FindBy(css = "body > div > div.page > div.main-container.col3-layout > div > div.col-wrapper > div.col-main > div.page-title > h1")
     private static WebElement productTitle;
+
+    @FindBy(css = "body > div > div.page > div.main-container.col1-layout > div > div > div.cart.display-single-price > ul > li > ul > li > span")
+    private static WebElement cartTitle;
 
     @Step("Add Product to Wish List")
     public static void addWishlistProduct () {
@@ -44,4 +47,10 @@ public class ProductPage extends BasePage {
     public static String getTitleProductMessage() {
         return productTitle.getText();
     }
+
+    @Step("Get Cart Message")
+    public static String getCartMessage() {
+        return cartTitle.getText();
+    }
+
 }

@@ -12,14 +12,11 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    @FindBy(id  ="Physical & Virtual Gift Cards")
+    @FindBy(css ="body > div > div.page > div.main-container.col1-layout > div > div > div > ul > li:nth-child(1) > a > img")
     private static WebElement giftCards;
 
-    @FindBy(id ="Decorative Accents")
+    @FindBy(css ="body > div > div.page > div.main-container.col1-layout > div > div.col-main > ul > li:nth-child(4) > a > img")
     private static WebElement decorativeAccents;
-
-    @FindBy(id = "product-collection-image-390")
-    private static WebElement product1;
 
     @FindBy(id = "select-language")
     private static WebElement selectLanguage;
@@ -34,11 +31,13 @@ public class HomePage extends BasePage {
     @FindBy(css = "#header-account > div > ul > li.last > a")
     private static WebElement logInBotton;
 
-    @FindBy(css = "#header-account > div > ul > li.last > a")
-    private static WebElement logOutBotton;
 
     @FindBy(css = "#search")
     private static WebElement searchBar;
+
+
+    @FindBy(css ="body > div > div.page > div.main-container.col3-layout > div > div.col-wrapper > div.col-main > div.category-products > ul > li:nth-child(1) > div > h2 > a")
+    private static WebElement product3;
 
     @Step("Click To Login")
     public static void clickToLogin() {
@@ -46,11 +45,12 @@ public class HomePage extends BasePage {
         logInBotton.click();
     }
 
+
     @Step("Search and Click Product")
-    public void searchAndClickProduct(String product) {
+    public void searchAndClickProduct() {
         giftCards.click();
         decorativeAccents.click();
-        driver.findElement(By.id(product)).click();
+        product3.click();
         new ProductPage(driver);
     }
 
@@ -65,13 +65,6 @@ public class HomePage extends BasePage {
         searchBar.clear();
         searchBar.sendKeys(product);
         searchBotton.submit();
-    }
-
-    @Step("Logout")
-    public static LoginPage logOut() {
-        accountBotton.click();
-        logOutBotton.click();
-        return new LoginPage(driver);
     }
 
 }

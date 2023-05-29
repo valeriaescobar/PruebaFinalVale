@@ -1,6 +1,5 @@
 package scripts;
 
-import dataProvider.SearchData;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -33,16 +32,16 @@ public class AddToCartTest {
         driver.get(Constants.urlBase);
     }
 
-    @Test(dataProvider = "product", dataProviderClass = SearchData.class)
-    public void addToCartTest(String Product) {
+    @Test
+    public void addToCartTest() {
 
-        String expectedAddToCart = "was added to your shopping cart.";
+        String expectedCartTitle = "Stone Salt and Pepper Shakers was added to your shopping cart.";
 
         HomePage homePage = new HomePage(driver);
-        homePage.searchProduct(Product);
+        homePage.searchAndClickProduct();
         ProductPage productPage = new ProductPage(driver);
         productPage.addToCart();
-        assertEquals(ProductPage.getWishListMessage(), expectedAddToCart);
+        assertEquals(ProductPage.getCartMessage(), expectedCartTitle);
 
         takeScreenshot();
     }
