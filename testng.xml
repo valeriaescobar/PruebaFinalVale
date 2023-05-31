@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="All suites">
+    <suite-files>
+        <suite-file path="src/test/java/suites/login.xml"/>
+    </suite-files>
+
+    <suite-files>
+        <suite-file path="src/test/java/suites/language.xml"/>
+    </suite-files>
+
+    <suite-files>
+        <suite-file path="src/test/java/suites/search.xml"/>
+    </suite-files>
+
+</suite>
